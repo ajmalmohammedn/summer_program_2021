@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>K8S App</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="k8s-style.css">
+</head>
+
+<body>
+  <div id="viewport">
+    <!-- Sidebar -->
+    <div id="sidebar">
+      <header>
+        <a href="#">My App</a>
+      </header>
+      <ul class="nav">
+        <li>
+          <a href="#">
+            <!--list pods ul li a completed-->
+            <div class="runalert" onclick="listcont();">
+            <i class="zmdi zmdi-view-dashboard"></i> List Pods
+          </div>
+          </a>
+        </li>
+        <li>
+            <a href="#">
+              <!--desc pods ul li a completed...-->
+              <div id="descpod">
+              <i class="zmdi zmdi-view-dashboard"></i> Describe pod
+            </div>
+            </a>
+          </li>
+        <li>
+          <a href="#">
+            <!--list deploy ul li a completed-->
+            <div id="listdeploy">
+            <i class="zmdi zmdi-link"></i> List Deployments
+          </div>
+          </a>
+        </li>
+        <li>
+            <a href="#">
+              <!--descdeploy ul li a completed-->
+              <div id="descdeploy">
+              <i class="zmdi zmdi-link"></i> Describe Deployments
+            </div>
+            </a>
+          </li>
+        <li>
+          <a href="#">
+            <!--runpod ul li a completed-->
+            <div id="runpod">
+            <i class="zmdi zmdi-widgets"></i> Run Pod 
+          </div>
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <!--deldeploy ul li a-->
+            <div id="createdeploy">
+            <i class="zmdi zmdi-calendar"></i> Create Deployment
+          </div>
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <!--deldeploy ul li a complete-->
+            <div id="delpod">
+            <i class="zmdi zmdi-calendar"></i> Delete Pod 
+          </div>
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <!--deldeploy ul li a-->
+            <div id="deldeploy">
+            <i class="zmdi zmdi-calendar"></i> Delete Deployment
+          </div>
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <!--expose deployment ul li a complete-->
+            <div id="exposedeploy">
+            <i class="zmdi zmdi-info-outline"></i> Expose Deployment
+          </div>
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <div id="listsvcs">
+            <i class="zmdi zmdi-settings"></i> Get Service
+          </div>
+          </a>
+        </li>
+        <li>
+            <a href="#">
+              <div id="descsvcs">
+              <i class="zmdi zmdi-settings"></i>Describe Service
+            </div>
+            </a>
+          </li>
+        <li>
+          <a href="#">
+            <div id="connectnode">
+            <i class="zmdi zmdi-comment-more"></i>Connected Nodes
+            </div>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <!-- Content -->
+    <div id="content">
+      <nav class="navbar navbar-default">
+        <div class="container-fluid">
+          <ul class="nav navbar-nav navbar-right">
+            <li>
+              <a href="#"><i class="zmdi zmdi-notifications text-danger active"></i>Summer_10_5 
+              </a>
+            </li>
+            <!--<li><a href="#">Test User</a></li>-->
+          </ul>
+        </div>
+      </nav>
+      <div class="container-fluid">
+        <h1>K8S GUI</h1>
+        <p>
+          Write Command below
+          <code>#command</code>.
+        <div class="cmdBox">
+          <input type="text" name="x" placeholder="Enter Command!" id="cmdid">
+          <button class="next" onclick="give_command_output();">RUN</button>
+        </div>
+        <br>
+
+        <!--createcontainerhide1-->
+        <div  id="createcontainerhide1">
+          <span onclick="document.getElementById('createcontainerhide1').style.display='none'" class="close" title="Close Modal">&times;</span>
+        <form>
+          <div class="form-group">
+            <label for="exampleInputEmail1">Pod Name</label>
+            <input type="text" class="form-control" id="Inputosname1" aria-describedby="emailHelp" placeholder="e.g os1" required>
+            <small id="emailHelp" class="form-text text-muted">It's good to give Pod Name</small>
+          </div>
+          <div class="form-group">
+            <label for="exampleInputPassword1">Image Name</label>
+            <input type="text" class="form-control" id="Inputimage1" placeholder="e.g centos:latest" required>
+          </div>
+          <button type="submit" class="btn btn-primary" id="createContainer">Apply</button>
+        </form>
+        </div>     
+      
+        <!--create container hide closed-->
+        <div id="descpod1" style="display: none;">
+          <span onclick="document.getElementById('descpod1').style.display='none'" class="close" title="Close Modal">&times;</span>
+        <form>
+          <div class="form-group">
+            <label for="exampleInputEmail1">Pod Name</label>
+            <input type="text" class="form-control" id="descpodname" aria-describedby="emailHelp" placeholder="To see avaliable pods clock on show button"  required>          </input>  
+            <small id="emailHelp" class="form-text text-muted">Will describe pod</small>
+          </div>
+          <button type="submit" class="btn btn-primary" id="descpod1Apply">Apply</button>
+          <button type="submit" class="btn btn-primary" id="showavaliablepod" onclick="give_pod_output();">Show Pods</button> 
+        </form>
+        </div>
+
+        <!--descdeploy block-->
+        <div id="descdeployhide1" style="display: none;">
+         <span onclick="document.getElementById('descdeployhide1').style.display='none'" class="close" title="Close Modal">&times;</span>
+        <form>
+          <div class="form-group">
+            <label for="exampleInputEmail1">Deployment Name</label>
+            <input type="text" class="form-control" id="descdeployname" aria-describedby="emailHelp" placeholder="e.g os1" required>
+            <small id="emailHelp" class="form-text text-muted">Will describe Deployment</small>
+          </div>
+        <button type="submit" class="btn btn-primary" id="descdeployapply">Apply</button>
+        <button type="submit" class="btn btn-primary" id="showavaliablepod" onclick="give_deploy_output();">Show Deployment</button> 
+        </form>
+        </div>
+    
+        <!--expose deploy hideblock 1 start-->
+        <div  id="exposedeployhide1" style="display: none;">
+          <span onclick="document.getElementById('exposedeployhide1').style.display='none'" class="close" title="Close Modal">&times;</span>
+        <form>
+          <div class="form-group">
+            <label for="exampleInputEmail1">Deployment Name</label>
+            <input type="text" class="form-control" id="exposedeploy-name" aria-describedby="emailHelp" placeholder="e.g myd" required>
+            <small id="emailHelp" class="form-text text-muted">Give deployment name</small><br>
+            <label for="exampleInputEmail1">System Port</label>
+            <input type="number" class="form-control" id="exposedeploy-port1"   required>
+            <label for="exampleInputEmail1">Expose Type</label>
+            <input type="textr" class="form-control" id="exposedeploy-type"   required>
+          </div>
+          <button type="submit" class="btn btn-primary" id="exposedeploy-apply">Apply</button>
+        </form>
+        </div>
+
+        <!--deletecontainer-->
+        <div  id="deletepodhide1" style="display: none;">
+          <span onclick="document.getElementById('deletepodhide1').style.display='none'" class="close" title="Close Modal">&times;</span>
+        <form>
+          <div class="form-group">
+            <label for="exampleInputEmail1">Pod Name</label>
+            <input type="text" class="form-control" id="deletepodname1" aria-describedby="emailHelp" placeholder="e.g os1" required>
+            <small id="emailHelp" class="form-text text-muted">Will delete container</small>
+          </div>
+          <button type="submit" class="btn btn-primary" id="deletepodapply">Apply</button>
+        </form>
+        </div>
+        <!--deletecontainer-->
+
+        <div  id="createdeployhide1" style="display: none;">
+          <span onclick="document.getElementById('createdeployhide1').style.display='none'" class="close" title="Close Modal">&times;</span>
+        <form>
+          <div class="form-group">
+            <label for="exampleInputEmail1">Deployment Name</label>
+            <input type="text" class="form-control" id="createdeployname" aria-describedby="emailHelp" placeholder="e.g os1" required>
+            <small id="emailHelp" class="form-text text-muted">It's good to give Pod Name</small>
+          </div>
+          <div class="form-group">
+            <label for="exampleInputPassword1">Image Name</label>
+            <input type="text" class="form-control" id="createdeployimage" placeholder="e.g centos:latest" required>
+          </div>
+          <button type="submit" class="btn btn-primary" id="createdeployapply">Apply</button>
+        </form>
+        </div>
+
+        <!--create deployment block-->
+
+        <!--create deployment end-->
+        <div  id="deletedeployhide1" style="display: none;">
+          <span onclick="document.getElementById('deletedeployhide1').style.display='none'" class="close" title="Close Modal">&times;</span>
+        <form>
+          <div class="form-group">
+            <label for="exampleInputEmail1">Deployment Name</label>
+            <input type="text" class="form-control" id="deletedeployname" aria-describedby="emailHelp" placeholder="e.g os1" required>
+            <small id="emailHelp" class="form-text text-muted">Will delete deployment</small>
+          </div>
+          <button type="submit" class="btn btn-primary" id="deletedeployapply">Apply</button>
+        </form>
+        </div>
+        <!--describe service block-->
+        <div id="descsvchide1" style="display: none;">
+          <span onclick="document.getElementById('descsvchide1').style.display='none'" class="close" title="Close Modal">&times;</span>
+         <form>
+           <div class="form-group">
+             <label for="exampleInputEmail1">Service Name</label>
+             <input type="text" class="form-control" id="dessvcname" aria-describedby="emailHelp" required>
+             <small id="emailHelp" class="form-text text-muted">Will describe Service</small>
+           </div>
+         <button type="submit" class="btn btn-primary" id="descsvcapply">Apply</button>
+         </form>
+         </div>
+        <br>
+        <h3>Output:-</h3>
+        </p>
+        <pre>
+        <div class="container-fluid" id="output1" ></div>
+      </pre>
+      
+      </div>
+      
+    </div>
+    
+  </div>
+</body>
+<script src="k8s.js"></script>
+</html>
